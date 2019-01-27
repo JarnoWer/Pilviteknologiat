@@ -4,8 +4,8 @@
 Projektityön nimi on VPN-Palvelut ja -palvelin.
 
 ## Ryhmän jäsenet
-Wermundsen Jarno,
-Zitting Miikka
+* Wermundsen Jarno,
+* Zitting Miika
 
 ## Aihe, tavoite ja toteutus
 
