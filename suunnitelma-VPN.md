@@ -57,6 +57,7 @@ Projektin piiriin ei kuulu palvelun markkionointi tai tuotteistaminen. Projektis
 Projektin riskit on kartoittettu alla olevaan taulukkoon.
 
 *) 3 = pieni, 2 = kohtuullinen, 1 = suuri/huomattava.
+
 | Riski | Todennäköisyys | Seuraus- vaikutus | Syyt | Syiden ennaltaehkäisy | Seurauksiin varautuminen |
 | ---	 | ---	 | ---	 | ---	 | ---	 | ---	 |
 | Avainhenkilö jättää projektin | 3 | 1 | Henkilökohtaiset syyt, muut opinnot, hyvä työtarjous, kuolema, muu vakava vammautuminen | Mielekkäiden työkokonaisuuksien takaaminen, nykyaikaiset välineet työlle, sitoutuminen opintojen jatkamiseen | Projektin tehtävän ja tulosten määrittely ja jako |
