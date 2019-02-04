@@ -1,8 +1,5 @@
-
-
-
-
-
+`Pilvitegnologiat`
+`ICT4TN024`
 
 
 # Projektityösuunnitelma 
@@ -26,8 +23,6 @@
 
 
 
-					Pilvitegnologiat
-					ICT4TN024
 
 
 
