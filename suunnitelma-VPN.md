@@ -63,7 +63,7 @@ Projektin riskit on kartoittettu alla olevaan taulukkoon.
 ## Projektiryhmä 
 Projekti tehdään ryhmätyönä ryhmässä, johon kuuluvat 
 - Miika Zitting 
-- Jarno Wermundsen. 
+- Jarno Wermundsen
 
 
 ## Projektin ympäristö 
