@@ -7,8 +7,8 @@
 
 # Projektityösuunnitelma 
 
-* Jarno Wermundsen
-* Miika Zitting
+* ***Jarno Wermundsen***
+* ***Miika Zitting***
 
 
 
