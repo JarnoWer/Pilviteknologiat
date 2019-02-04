@@ -58,7 +58,7 @@ Projektin riskit on kartoittettu alla olevaan taulukkoon.
 
 *) 3 = pieni, 2 = kohtuullinen, 1 = suuri/huomattava.
 | Riski | Todennäköisyys | Seuraus- vaikutus | Syyt | Syiden ennaltaehkäisy | Seurauksiin varautuminen |
-| ----- | ------------- | ----------------- | ---- | --------------------- | ------------------------ |
+| ---	 | ---	 | ---	 | ---	 | ---	 | ---	 |
 | Avainhenkilö jättää projektin | 3 | 1 | Henkilökohtaiset syyt, muut opinnot, hyvä työtarjous, kuolema, muu vakava vammautuminen | Mielekkäiden työkokonaisuuksien takaaminen, nykyaikaiset välineet työlle, sitoutuminen opintojen jatkamiseen | Projektin tehtävän ja tulosten määrittely ja jako |
 | Projektin tehtävä jää muun työn jalkoihin | 2 | 2 | Projektikulttuuri heikko, töiden priorisointi epäonnistunut | Keskittyminen projektin tehtävään: n. 8-10t/vko lukujärjestykseen merkittyä työaikaa, säännölliset projekti palaverit | Päätös projektin keston, tavoitteen muuttamiseksi |
 | Perehtyminen ja osaaminen ei riitä | 1 | 3 | Huono materiaali, riittämätön ohjaus, täysin odottamaton ongelma | Hyvä perehtyminen ja töiden sunnittelu | Sovellusten vaihtaminen, pilvipalvelun tarjoajan vaihtaminen, yhteydenotto opettajiin ja/tai asiantuntijoihin.
