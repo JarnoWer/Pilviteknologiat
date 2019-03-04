@@ -91,6 +91,6 @@ net/ipv4/conf/all/send_redirects=0
 net/ipv4/ip_no_pmtu_disc=1
 ' | sudo tee -a /etc/ufw/sysctl.conf
 
-sudo systemctl restart restart
+sudo systemctl restart ufw
 
 cat /etc/ipsec.d/cacerts/ca-cert.pem >> certificate.pem
