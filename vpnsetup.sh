@@ -9,7 +9,9 @@ sudo apt-get -y install strongswan strongswan-pki
 mkdir -p ~/pki/{cacerts,certs,private}
 chmod 700 ~/pki
 
-ipsec pki --gen --type rsa --size 4096 --outform pem > ~/pki/private/ca-key.pem
+#Creates 1024 bit certificate -> Windows cant handle any bigger
+
+ipsec pki --gen --type rsa --size 1024 --outform pem > ~/pki/private/ca-key.pem
 
 read -p "Give a name for your cert: " name
 
