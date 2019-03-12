@@ -1,7 +1,7 @@
 -#!/bin/bash
 
 #Copyright 2019 Miika Zitting & Jarno Wermundsen http://miikazitting.wordpress.com GPL 3
-#Script to setup of a liveusb and set it up as a slave for master
+#Script to setup an Strongswan Ikev2 VPN server automatically
 
 sudo apt-get update
 sudo apt-get -y install strongswan strongswan-pki
@@ -14,7 +14,7 @@ ipsec pki --gen --type rsa --size 4096 --outform pem > ~/pki/private/ca-key.pem
 read -p "Give a name for your cert: " name
 
 ipsec pki --self --ca --lifetime 3650 --in ~/pki/private/ca-key.pem     --type rsa --dn "CN=$name" --outform pem > ~/pki/cacerts/ca-cert.pem
-ipsec pki --gen --type rsa --size 4096 --outform pem > ~/pki/private/server-key.pem
+ipsec pki --gen --type rsa --size 1024 --outform pem > ~/pki/private/server-key.pem
 
 read -p "Give the IP for your server: " ipaddress
 
@@ -29,7 +29,7 @@ ipsec pki --pub --in ~/pki/private/server-key.pem --type rsa \
 sudo cp -r ~/pki/* /etc/ipsec.d/
 sudo mv /etc/ipsec.conf{,.original}
 
-echo "config setup
+echo 'config setup
     charondebug="ike 1, knl 1, cfg 0"
     uniqueids=no
 
@@ -54,7 +54,7 @@ conn ikev2-vpn
     rightsourceip=10.10.10.0/24
     rightdns=8.8.8.8,8.8.4.4
     rightsendcert=never
-    eap_identity=%identity" | sudo tee /etc/ipsec.conf
+    eap_identity=%identity' | sudo tee /etc/ipsec.conf
 
 read -p "Give a username for your VPN account: " username
 read -p "Give a password for your VPN account: " password
@@ -68,7 +68,7 @@ sudo ufw allow ssh
 sudo ufw enable
 sudo ufw allow 500,4500/udp
 
-interface=`ip route | grep -Po "(dev \K[^ ]+)" | head -1`
+interface='ip route | grep -Po "(dev \K[^ ]+)" | head -1'
 
 echo '*nat
 -A POSTROUTING -s 10.10.10.0/24 -o $interface -m policy --pol ipsec --dir out -j ACCEPT
