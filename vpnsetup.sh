@@ -70,7 +70,7 @@ sudo ufw allow ssh
 sudo ufw enable
 sudo ufw allow 500,4500/udp
 
-interface = ip route | grep -Po "(dev \K[^ ]+)" | head -1'
+interface = ip route | grep -Po "(dev \K[^ ]+)" | head -1
 
 echo '*nat
 -A POSTROUTING -s 10.10.10.0/24 -o $interface -m policy --pol ipsec --dir out -j ACCEPT
