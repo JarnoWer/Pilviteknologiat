@@ -90,8 +90,7 @@ interface=$(ip route | grep -Po "(dev \K[^ ]+)" | head -1)
 
 #UFW before rules - Ugly but works
 
-echo -e " 
-#
+echo -e " #
 # rules.before
 #
 # Rules that should be run before the ufw command line added rules. Custom
