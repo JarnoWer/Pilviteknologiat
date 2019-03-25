@@ -8,8 +8,8 @@
 #   ufw-before-forward
 #
 *nat
--A POSTROUTING -s 10.10.10.0/24 -o eth0 -m policy --pol ipsec --dir out -j ACCEPT
--A POSTROUTING -s 10.10.10.0/24 -o eth0 -j MASQUERADE
+-A POSTROUTING -s 10.10.10.0/24 -o $interface -m policy --pol ipsec --dir out -j ACCEPT
+-A POSTROUTING -s 10.10.10.0/24 -o $interface -j MASQUERADE
 COMMIT
 
 *mangle
@@ -85,6 +85,3 @@ COMMIT
 # don't delete the 'COMMIT' line or these rules won't be processed
 
 COMMIT
-
-
-
