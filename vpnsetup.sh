@@ -31,11 +31,7 @@ ipsec pki --pub --in ~/pki/private/server-key.pem --type rsa \
 sudo cp -r ~/pki/* /etc/ipsec.d/
 sudo mv /etc/ipsec.conf{,.original}
 
-<<<<<<< HEAD
 echo -e "config setup
-=======
-echo "config setup
->>>>>>> a20b830c27ab4ff2fd5bc2613ef66c506e864ce5
     charondebug="ike 1, knl 1, cfg 0"
     uniqueids=no
 
@@ -94,13 +90,7 @@ interface=$(ip route | grep -Po "(dev \K[^ ]+)" | head -1)
 
 #UFW before rules - Ugly but works
 
-<<<<<<< HEAD
 echo -e " 
-
-
-
-=======
-echo -e "
 #
 # rules.before
 #
