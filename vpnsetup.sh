@@ -1,4 +1,4 @@
--#!/bin/bash
+#!/bin/bash
 
 #Copyright 2019 Miika Zitting & Jarno Wermundsen http://miikazitting.wordpress.com GPL 3
 #Script to setup an Strongswan Ikev2 VPN server automatically
@@ -58,21 +58,37 @@ conn ikev2-vpn
     rightsendcert=never
     eap_identity=%identity' | sudo tee /etc/ipsec.conf
 
-read -p "Give a username for your VPN account: " username
-read -p "Give a password for your VPN account: " password
-
+#Add multiple new users with this loop
 
 echo ': RSA "server-key.pem"' | sudo tee /etc/ipsec.secrets
+
+read -p "Give username: " username
+read -p "Give password: " password
+
 echo "$username : EAP $password" | sudo tee -a /etc/ipsec.secrets
+
+while true
+
+do
+    read -p "Do you want to add more users? [y/n] " answer
+
+    [ "n" = "$answer" ] && break
+
+    read -p "Give username: " username
+    read -p "Give password: " password
+
+    echo "$username : EAP $password" | sudo tee -a /home/vpn/testfile.txt
+
+done
 
 sudo systemctl restart strongswan
 sudo ufw allow ssh
 sudo ufw enable
 sudo ufw allow 500,4500/udp
 
-interface = ip route | grep -Po "(dev \K[^ ]+)" | head -1
+interface=$(ip route | grep -Po "(dev \K[^ ]+)" | head -1)
 
-echo '*nat
+echo "*nat
 -A POSTROUTING -s 10.10.10.0/24 -o $interface -m policy --pol ipsec --dir out -j ACCEPT
 -A POSTROUTING -s 10.10.10.0/24 -o $interface -j MASQUERADE
 COMMIT
@@ -84,7 +100,7 @@ COMMIT
 -A ufw-before-forward --match policy --pol ipsec --dir in --proto esp -s 10.10.10.0/24 -j ACCEPT
 -A ufw-before-forward --match policy --pol ipsec --dir out --proto esp -d 10.10.10.0/24 -j ACCEPT
 
-' | sudo tee -a /etc/ufw/before.rules
+" | sudo tee -a /etc/ufw/before.rules
 
 echo 'net/ipv4/ip_forward=1
 # Do not send ICMP redirects (we are not a router)
@@ -93,6 +109,7 @@ net/ipv4/conf/all/send_redirects=0
 net/ipv4/ip_no_pmtu_disc=1
 ' | sudo tee -a /etc/ufw/sysctl.conf
 
-sudo systemctl restart ufw
+sudo service ufw restart
+
 
 cat /etc/ipsec.d/cacerts/ca-cert.pem >> certificate.pem
