@@ -90,7 +90,8 @@ interface=$(ip route | grep -Po "(dev \K[^ ]+)" | head -1)
 
 #UFW before rules - Ugly but works
 
-echo -e " #
+echo -e " 
+#
 # rules.before
 #
 # Rules that should be run before the ufw command line added rules. Custom
@@ -102,10 +103,11 @@ echo -e " #
 *nat
 -A POSTROUTING -s 10.10.10.0/24 -o $interface -m policy --pol ipsec --dir out -j ACCEPT
 -A POSTROUTING -s 10.10.10.0/24 -o $interface -j MASQUERADE
+COMMIT
 
 *mangle
 -A FORWARD --match policy --pol ipsec --dir in -s 10.10.10.0/24 -o eth0 -p tcp -m tcp --tcp-flags SYN,RST SYN -m tcpmss --mss 1361:1536 -j TCPMSS --set-mss 1360
-
+COMMIT
 # Don't delete these required lines, otherwise there will be errors
 *filter
 :ufw-before-input - [0:0]
@@ -121,36 +123,6 @@ echo -e " #
 # allow all on loopback
 -A ufw-before-input -i lo -j ACCEPT
 -A ufw-before-output -o lo -j ACCEPT
-
-# quickly process packets for which we already have a connection
--A ufw-before-input -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
--A ufw-before-output -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
--A ufw-before-forward -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
-
-# drop INVALID packets (logs these in loglevel medium and higher)
--A ufw-before-input -m conntrack --ctstate INVALID -j ufw-logging-deny
--A ufw-before-input -m conntrack --ctstate INVALID -j DROP
-
-# ok icmp codes for INPUT
--A ufw-before-input -p icmp --icmp-type destination-unreachable -j ACCEPT
--A ufw-before-input -p icmp --icmp-type source-quench -j ACCEPT
--A ufw-before-input -p icmp --icmp-type time-exceeded -j ACCEPT
--A ufw-before-input -p icmp --icmp-type parameter-problem -j ACCEPT
--A ufw-before-input -p icmp --icmp-type echo-request -j ACCEPT
-
-# ok icmp code for FORWARD
--A ufw-before-forward -p icmp --icmp-type destination-unreachable -j ACCEPT
--A ufw-before-forward -p icmp --icmp-type source-quench -j ACCEPT
--A ufw-before-forward -p icmp --icmp-type time-exceeded -j ACCEPT
--A ufw-before-forward -p icmp --icmp-type parameter-problem -j ACCEPT
--A ufw-before-forward -p icmp --icmp-type echo-request -j ACCEPT
-
-# allow dhcp client to work
--A ufw-before-input -p udp --sport 67 --dport 68 -j ACCEPT
-
-#
-# ufw-not-local
-#
 
 # quickly process packets for which we already have a connection
 -A ufw-before-input -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
