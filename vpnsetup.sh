@@ -99,7 +99,7 @@ echo -e "
 #   ufw-before-input
 #   ufw-before-output
 #   ufw-before-forward
-
+#
 *nat
 -A POSTROUTING -s 10.10.10.0/24 -o $interface -m policy --pol ipsec --dir out -j ACCEPT
 -A POSTROUTING -s 10.10.10.0/24 -o $interface -j MASQUERADE
@@ -114,7 +114,6 @@ COMMIT
 :ufw-before-output - [0:0]
 :ufw-before-forward - [0:0]
 :ufw-not-local - [0:0]
-
 # End required lines
 -A ufw-before-forward --match policy --pol ipsec --dir in --proto esp -s 10.10.10.0/24 -j ACCEPT
 -A ufw-before-forward --match policy --pol ipsec --dir out --proto esp -d 10.10.10.0/24 -j ACCEPT
@@ -153,7 +152,6 @@ COMMIT
 #
 # ufw-not-local
 #
-
 -A ufw-before-input -j ufw-not-local
 
 # if LOCAL, RETURN
@@ -179,7 +177,9 @@ COMMIT
 
 # don't delete the 'COMMIT' line or these rules won't be processed
 
-COMMIT" | sudo tee /etc/ufw/before.rules
+COMMIT
+
+" | sudo tee /etc/ufw/before.rules
 
 
 echo "net/ipv4/ip_forward=1
