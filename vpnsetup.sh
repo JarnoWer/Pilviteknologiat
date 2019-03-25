@@ -90,8 +90,7 @@ interface=$(ip route | grep -Po "(dev \K[^ ]+)" | head -1)
 
 #UFW before rules - Ugly but works
 
-echo -e " 
-#
+echo -e "#
 # rules.before
 #
 # Rules that should be run before the ufw command line added rules. Custom
@@ -100,7 +99,6 @@ echo -e "
 #   ufw-before-output
 #   ufw-before-forward
 #
-
 *nat
 -A POSTROUTING -s 10.10.10.0/24 -o $interface -m policy --pol ipsec --dir out -j ACCEPT
 -A POSTROUTING -s 10.10.10.0/24 -o $interface -j MASQUERADE
@@ -109,7 +107,6 @@ COMMIT
 *mangle
 -A FORWARD --match policy --pol ipsec --dir in -s 10.10.10.0/24 -o eth0 -p tcp -m tcp --tcp-flags SYN,RST SYN -m tcpmss --mss 1361:1536 -j TCPMSS --set-mss 1360
 COMMIT
-
 # Don't delete these required lines, otherwise there will be errors
 *filter
 :ufw-before-input - [0:0]
