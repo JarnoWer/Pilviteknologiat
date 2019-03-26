@@ -77,7 +77,7 @@ do
     read -p "Give username: " username
     read -p "Give password: " password
 
-    echo "$username : EAP $password" | sudo tee -a /etc/ipsec.secrets
+    echo '$username : EAP "$password"' | sudo tee -a /etc/ipsec.secrets
 
 done
 
