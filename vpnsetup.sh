@@ -18,7 +18,9 @@ read -p "Give a name for your cert: " name
 ipsec pki --self --ca --lifetime 3650 --in ~/pki/private/ca-key.pem     --type rsa --dn "CN=$name" --outform pem > ~/pki/cacerts/ca-cert.pem
 ipsec pki --gen --type rsa --size 1024 --outform pem > ~/pki/private/server-key.pem
 
-read -p "Give the IP for your server: " ipaddress
+ipaddress=$(hostname -I | grep -o '^[^ ]*')
+
+echo "Give the IP for your server: "  $ipaddress
 
 ipsec pki --pub --in ~/pki/private/server-key.pem --type rsa \
     | ipsec pki --issue --lifetime 1825 \
@@ -193,3 +195,5 @@ sudo service ufw restart
 
 
 cat /etc/ipsec.d/cacerts/ca-cert.pem >> certificate.pem
+
+echo "*** YOUR IP ADDRESS FOR THIS SERVER IS "$ipaddress" ***"
