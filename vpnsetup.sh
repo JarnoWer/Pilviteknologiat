@@ -9,14 +9,14 @@ sudo apt-get -y install strongswan strongswan-pki
 mkdir -p ~/pki/{cacerts,certs,private}
 chmod 700 ~/pki
 
-#Creates 1024 bit certificate -> Windows cant handle any bigger
+#Creates 4096 bit certificate
 
-ipsec pki --gen --type rsa --size 1024 --outform pem > ~/pki/private/ca-key.pem
+ipsec pki --gen --type rsa --size 4096 --outform pem > ~/pki/private/ca-key.pem
 
 read -p "Give a name for your cert: " name
 
 ipsec pki --self --ca --lifetime 3650 --in ~/pki/private/ca-key.pem     --type rsa --dn "CN=$name" --outform pem > ~/pki/cacerts/ca-cert.pem
-ipsec pki --gen --type rsa --size 1024 --outform pem > ~/pki/private/server-key.pem
+ipsec pki --gen --type rsa --size 4096 --outform pem > ~/pki/private/server-key.pem
 
 ipaddress=$(hostname -I | grep -o '^[^ ]*')
 
